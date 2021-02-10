@@ -7,50 +7,47 @@ db.once('open', function () {
   // we're connected!
   console.log('CONNECTED TO DB');
 
-  let repoSchema = new mongoose.Schema({
-    repoId: Number,
-    repoName: String,
+  let itemSchema = new mongoose.Schema({
+    itemId: Number,
+    itemName: String,
     username: String,
     stargazersCount: Number,
     htmlUrl: String,
     created: String
   });
 
-  let Repo = mongoose.model('Repo', repoSchema);
+  let item = mongoose.model('item', itemSchema);
 
 });
 
 
-// Take a repo from the API
-// Create a document of it (based on the model)
-// Save that document to the database
+// Input - array of items from github API
 
-
-// Input - array of repos from github API
-
-let save = (repos) => {
+let save = (items) => {
   // TODO: Your code here
-  // This function should save a repo or repos to
+  // This function should save a item or items to
   // the MongoDB
 
 
-  // Map through each repo in repos array
-  repos.map(repo => {
+  // Map through each repo in array, create document, save document to dbx
+  items.forEach(item => {
+
+    // Check if this document already exists in db
 
     // Create document
-    const id = new Repo({
-      repoId: repo.id,
-      repoName: repo.name,
-      username: repo.owner.login,
-      stargazersCount: repo.stargazers_count,
-      htmlUrl: repo.html_url,
-      created: repo.created_at
+    const repo = new item({
+      itemId: item.id,
+      itemName: item.name,
+      username: item.owner.login,
+      stargazersCount: item.stargazers_count,
+      htmlUrl: item.html_url,
+      created: item.created_at
     });
 
     // Save document to DB
-    id.save(function (err, id) {
+    repo.save(function (err, repo) {
       if (err) return console.error(err);
-      console.log('repo saved to db: ', id);
+      console.log('item saved to db: ', repo);
     });
 
   });

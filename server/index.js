@@ -18,33 +18,11 @@ app.post('/repos', function (req, res) {
 
   let username = req.body.username;
 
+  gitHubAPI.getReposByUsername(username, function (err, response) {
+    if (err) throw err;
 
-  // Input - username
-  // Output - an array of repos
-  gitHubAPI.getReposByUsername(username);
-
-  // Input an array of repos
-  database.save();
-
-
-
-
-
-
-  // const repoPromise = (username) => {
-  //   return new Promise((resolve, reject) => {
-  //     gitHubAPI.getReposByUsername((error, username) => {
-  //       if (error) reject(error);
-  //       else resolve(data);
-  //     })
-  //   });
-  // }
-
-  // repoPromise(username)
-  //   .then((repos) => {
-  //     console.log('inside promise chain: ', repos);
-  //   })
-  //   .catch(error => console.error('something went wrong', error));
+    console.log(response);
+  });
 
 
 });
