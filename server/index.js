@@ -1,7 +1,14 @@
 const express = require('express');
 let app = express();
 
+let gitHubAPI = require('../helpers/github.js');
+//console.log(getReposByUsername);
+
+app.use(express.json()) // for parsing application/json
+app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 app.use(express.static(__dirname + '/../client/dist'));
+
+
 
 app.post('/repos', function (req, res) {
   // TODO - your code here!
@@ -9,7 +16,13 @@ app.post('/repos', function (req, res) {
   // and get the repo information from the github API, then
   // save the repo information in the database
 
-  console.log('someone posted');
+
+  console.log(req.body);
+  console.log(req.body.username);
+
+  let username = req.body.username;
+  gitHubAPI.getReposByUsername(username);
+  //res.json(req.body.username);
 
 
 });
