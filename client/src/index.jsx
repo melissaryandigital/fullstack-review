@@ -22,7 +22,7 @@ class App extends React.Component {
       url: 'http://localhost:1128/repos',
       data: {username: term},
       success: function (data) {
-        console.log('successfully posted! ', data);
+        console.log('successfully posted! ');
       }
     });
 
