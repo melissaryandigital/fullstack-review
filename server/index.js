@@ -19,9 +19,17 @@ app.post('/repos', function (req, res) {
   let username = req.body.username;
 
 
-  // Need to make this asynchromous
+  // Input - username
+  // Output - an array of repos
   gitHubAPI.getReposByUsername(username);
+
+  // Input an array of repos
   database.save();
+
+
+
+
+
 
   // const repoPromise = (username) => {
   //   return new Promise((resolve, reject) => {
