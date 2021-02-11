@@ -1,56 +1,52 @@
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/fetcher');
 
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function () {
-  // we're connected!
-  console.log('CONNECTED TO DB');
-
-  let itemSchema = new mongoose.Schema({
-    itemId: Number,
-    itemName: String,
-    username: String,
-    stargazersCount: Number,
-    htmlUrl: String,
-    created: String
-  });
-
-  let item = mongoose.model('item', itemSchema);
-
+let repoSchema = mongoose.Schema({
+  repoId: Number,
+  repoName: String,
+  username: String,
+  stargazersCount: Number,
+  htmlUrl: String,
+  created: String
 });
 
+let Repo = mongoose.model('Repo', repoSchema);
 
-// Input - array of items from github API
 
-let save = (items) => {
+let save = (gitHubRepos) => {
   // TODO: Your code here
-  // This function should save a item or items to
+  // This function should save a repo or repos to
   // the MongoDB
 
 
-  // Map through each repo in array, create document, save document to dbx
-  items.forEach(item => {
+  // See if you can get one thing saved
 
-    // Check if this document already exists in db
 
-    // Create document
-    const repo = new item({
-      itemId: item.id,
-      itemName: item.name,
-      username: item.owner.login,
-      stargazersCount: item.stargazers_count,
-      htmlUrl: item.html_url,
-      created: item.created_at
-    });
+  gitHubRepos.forEach(gitHubRepo => {
 
-    // Save document to DB
-    repo.save(function (err, repo) {
-      if (err) return console.error(err);
-      console.log('item saved to db: ', repo);
-    });
-
+    const repo = new Repo({
+      repoId: gitHubRepo.id,
+      repoName: gitHubRepo.name,
+      username: gitHubRepo.owner.login,
+      stargazersCount: gitHubRepo.stargazers_count,
+      htmlUrl: gitHubRepo.html_url,
+      created: gitHubRepo.created_at
   });
+
+    repo.save(function (err, repo) {
+      if (err) return console.log(err);
+    });
+  });
+
+  // Repo.find(function (err, repo) {
+  //   if (err) return console.error(err);
+  //   console.log(repo);
+  // });
+
+  // To query in shell
+  // use fetcher
+  // db.repos.find({})
+
 
 }
 

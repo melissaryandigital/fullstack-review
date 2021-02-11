@@ -18,14 +18,19 @@ app.post('/repos', function (req, res) {
 
   let username = req.body.username;
 
-  gitHubAPI.getReposByUsername(username, function (err, response) {
-    if (err) throw err;
+  gitHubAPI.getReposByUsername(username)
+    .then(response => {
 
-    console.log(response);
-  });
-
+      console.log(response.data);
+      database.save(response.data);
+      res.sendStatus(200);
+    });
 
 });
+
+
+
+
 
 app.get('/repos', function (req, res) {
   // TODO - your code here!
