@@ -13,14 +13,14 @@ class App extends React.Component {
 
   }
 
-  search (term) {
+  search(term) {
     console.log(`${term} was searched`);
     // TODO
 
     $.ajax({
       type: "POST",
       url: 'http://localhost:1128/repos',
-      data: {username: term},
+      data: { username: term },
       success: function (data) {
         console.log('successfully posted! ');
       }
@@ -28,11 +28,23 @@ class App extends React.Component {
 
   }
 
-  render () {
+  componentDidMount() {
+    $.ajax({
+      type: "GET",
+      url: 'http://localhost:1128/repos',
+      success: function (data) {
+        this.setState({ repos: data });
+      }.bind(this)
+    });
+  }
+
+
+
+  render() {
     return (<div>
       <h1>Github Fetcher</h1>
-      <RepoList repos={this.state.repos}/>
-      <Search onSearch={this.search.bind(this)}/>
+      <RepoList repos={this.state.repos} />
+      <Search onSearch={this.search.bind(this)} />
     </div>)
   }
 }
