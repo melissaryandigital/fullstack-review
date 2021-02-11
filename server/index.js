@@ -10,6 +10,9 @@ app.use(express.static(__dirname + '/../client/dist'));
 
 
 
+let top25;
+
+
 app.post('/repos', function (req, res) {
   // TODO - your code here!
   // This route should take the github username provided
@@ -31,11 +34,11 @@ app.post('/repos', function (req, res) {
 app.get('/repos', function (req, res) {
   // TODO - your code here!
   // This route should send back the top 25 repos
-  console.log('get requested');
-  let top25 = database.sort();
-  console.log(top25);
-  //res.send(top25);
-  res.sendStatus(200);
+
+  database.sort()
+    .then((data) => {
+      res.send(data).status(200);
+    });
 
 });
 

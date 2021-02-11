@@ -18,10 +18,6 @@ let save = (gitHubRepos) => {
   // This function should save a repo or repos to
   // the MongoDB
 
-
-  // See if you can get one thing saved
-
-
   gitHubRepos.forEach(gitHubRepo => {
 
     const repo = new Repo({
@@ -46,20 +42,18 @@ let save = (gitHubRepos) => {
   // To query in shell
   // use fetcher
   // db.repos.find({})
-
-
 }
+
 
 let sort = () => {
 
   // sort documents in repos collection in descending order by stargazer count
 
-  Repo.find({}).sort({stargazersCount: -1}).limit(25).exec(function (err, docs) {
+  return Repo.find({}).sort({stargazersCount: -1}).limit(25).exec(function (err, docs) {
     if (err) return console.log(err);
 
-    console.log(docs);
-
   });
+
 }
 
 
