@@ -50,4 +50,19 @@ let save = (gitHubRepos) => {
 
 }
 
+let sort = () => {
+
+  // sort documents in repos collection in descending order by stargazer count
+
+  Repo.find({}).sort({stargazersCount: -1}).limit(25).exec(function (err, docs) {
+    if (err) return console.log(err);
+
+    console.log(docs);
+
+  });
+}
+
+
 module.exports.save = save;
+
+module.exports.sort = sort;
