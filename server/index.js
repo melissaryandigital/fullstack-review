@@ -23,8 +23,7 @@ app.post('/repos', function (req, res) {
 
   gitHubAPI.getReposByUsername(username)
     .then(response => {
-
-      console.log(response.data);
+      //console.log(response.data);
       database.save(response.data);
       res.sendStatus(200);
     });

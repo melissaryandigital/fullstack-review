@@ -5,18 +5,19 @@ const RepoList = (props) => (
     <div>
       <h4> Repo List Component </h4>
     There are {props.repos.length} repos.
+    <br />
+    <br />
   </div>
 
-    <ul>
+    <table>
+      <tr><td>Repo Name</td><td>GitHub User</td><td>Stargazer Count</td></tr>
 
-      {console.log('repo1', props.repos[0])}
-
-      { props.repos.map(repo => {
-          return <li><a href={repo.htmlUrl} target="_blank">{repo.repoName}</a></li>
-        })
+      {props.repos.map(repo => {
+        return <tr><td><a href={repo.htmlUrl} target="_blank">{repo.repoName}</a></td><td>{repo.username}</td><td>{repo.stargazersCount}</td></tr>
+      })
       }
 
-    </ul>
+    </table>
   </div>
 )
 

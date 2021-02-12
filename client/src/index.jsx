@@ -10,7 +10,7 @@ class App extends React.Component {
     this.state = {
       repos: []
     }
-
+    this.updatePage = this.updatePage.bind(this);
   }
 
   search(term) {
@@ -21,14 +21,20 @@ class App extends React.Component {
       type: "POST",
       url: 'http://localhost:1128/repos',
       data: { username: term },
-      success: function (data) {
-        console.log('successfully posted! ');
+      success: function () {
+        console.log('successful post');
       }
-    });
-
+    })
+      .done(() => { this.updatePage(); })
   }
 
+
   componentDidMount() {
+    this.updatePage();
+  }
+
+
+  updatePage() {
     $.ajax({
       type: "GET",
       url: 'http://localhost:1128/repos',
@@ -36,8 +42,8 @@ class App extends React.Component {
         this.setState({ repos: data });
       }.bind(this)
     });
-  }
 
+  }
 
 
   render() {
