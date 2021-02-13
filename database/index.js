@@ -1,9 +1,15 @@
 const mongoose = require('mongoose');
 
 // Local DB
-// mongoose.connect('mongodb://localhost/fetcher', { useNewUrlParser: true, useUnifiedTopology: true  });
+//mongoose.connect('mongodb://localhost/fetcher', { useNewUrlParser: true, useUnifiedTopology: true  });
 
 mongoose.connect(process.env.ATLAS_URI, { useNewUrlParser: true, useUnifiedTopology: true  });
+
+// const db = mongoose.connection;
+// db.on('error', console.error.bind(console, 'connection error:'));
+// db.once('open', function() {
+//   console.log('CONNECTED');
+// });
 
 let repoSchema = mongoose.Schema({
   repoId: Number,
