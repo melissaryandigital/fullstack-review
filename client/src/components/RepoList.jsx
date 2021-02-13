@@ -6,17 +6,18 @@ const RepoList = (props) => (
       <h4> Repo List Component </h4>
     There are {props.repos.length} repos.
     <br />
-    <br />
-  </div>
+      <br />
+    </div>
 
     <table>
-      <tr><td>Repo Name</td><td>GitHub User</td><td>Stargazer Count</td></tr>
+      <tbody>
+        <tr><td>Repo Name</td><td>GitHub User</td><td>Stargazer Count</td></tr>
 
-      {props.repos.map(repo => {
-        return <tr><td><a href={repo.htmlUrl} target="_blank">{repo.repoName}</a></td><td>{repo.username}</td><td>{repo.stargazersCount}</td></tr>
-      })
-      }
-
+        {props.repos.map(repo => {
+          return <tr><td><a href={repo.htmlUrl} target="_blank">{repo.repoName}</a></td><td>{repo.username}</td><td>{repo.stargazersCount}</td></tr>
+        })
+        }
+      </tbody>
     </table>
   </div>
 )
