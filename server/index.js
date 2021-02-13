@@ -1,13 +1,17 @@
+require('dotenv').config();
+
+var cors = require('cors');
 const express = require('express');
 let app = express();
 
 const gitHubAPI = require('../helpers/github.js');
 const database = require('../database/index.js');
 
-app.use(express.json()) // for parsing application/json
-app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
-app.use(express.static(__dirname + '/../client/dist'));
+var cors = require('cors');
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(__dirname + '/../client/dist'));
 
 
 let top25;
