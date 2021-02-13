@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/fetcher');
+mongoose.connect(process.env.ATLAS_URI || 'mongodb://localhost/fetcher');
 
 let repoSchema = mongoose.Schema({
   repoId: Number,
