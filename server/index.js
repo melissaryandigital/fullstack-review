@@ -26,6 +26,9 @@ app.post('/repos', function (req, res) {
       //console.log(response.data);
       database.save(response.data);
       res.sendStatus(200);
+    })
+    .catch((error) => {
+      console.log(error);
     });
 
 });
@@ -37,6 +40,9 @@ app.get('/repos', function (req, res) {
   database.sort()
     .then((data) => {
       res.send(data).status(200);
+    })
+    .catch((error) => {
+      console.log(error);
     });
 
 });
