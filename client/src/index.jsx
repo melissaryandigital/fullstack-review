@@ -19,7 +19,7 @@ class App extends React.Component {
 
     $.ajax({
       type: "POST",
-      url: 'http://localhost:1128/repos',
+      url: '/repos',
       data: { username: term },
       success: function () {
         console.log('successful post');
@@ -37,7 +37,7 @@ class App extends React.Component {
   updatePage() {
     $.ajax({
       type: "GET",
-      url: 'http://localhost:1128/repos',
+      url: '/repos',
       success: function (data) {
         this.setState({ repos: data });
       }.bind(this)
