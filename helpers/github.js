@@ -1,5 +1,9 @@
 const axios = require('axios');
-const config = require(process.env.GITHUB_API || '../config.js');
+
+if (process.env.NODE_ENV !== production) {
+  const config = require('../config.js');
+}
+
 
 let getReposByUsername = (usernameForAxios) => {
   // TODO - Use the axios module to request repos for a specific
