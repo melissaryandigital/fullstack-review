@@ -1,7 +1,12 @@
 const axios = require('axios');
 
+let GITHUB_TOKEN;
+
 if (process.env.NODE_ENV !== 'production') {
   const config = require('../config.js');
+  GITHUB_TOKEN = config.TOKEN;
+} else {
+  GITHUB_TOKEN = process.env.GITHUB_API;
 }
 
 
@@ -15,7 +20,7 @@ let getReposByUsername = (usernameForAxios) => {
     url: `https://api.github.com/users/${usernameForAxios}/repos`,
     headers: {
       'User-Agent': 'request',
-      'Authorization': `token ${process.env.GITHUB_API || config.TOKEN}`
+      'Authorization': `token ${GITHUB_TOKEN}`
     }
   };
 
