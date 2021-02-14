@@ -3,7 +3,14 @@ const mongoose = require('mongoose');
 // Local DB
 //mongoose.connect('mongodb://localhost/fetcher', { useNewUrlParser: true, useUnifiedTopology: true  });
 
-mongoose.connect(process.env.ATLAS_URI, { useNewUrlParser: true, useUnifiedTopology: true  });
+//mongoose.connect(process.env.ATLAS_URI, { useNewUrlParser: true, useUnifiedTopology: true  });
+
+
+mongoose
+     .connect( process.env.ATLAS_URI, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
+     .then(() => console.log( 'Database Connected' ))
+     .catch(err => console.log( err ));
+
 
 // const db = mongoose.connection;
 // db.on('error', console.error.bind(console, 'connection error:'));
